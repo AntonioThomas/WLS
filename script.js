@@ -1,47 +1,23 @@
-(function() {
-    ticker("ticker1", -1);
+const button = $("#btn");
+//console.log('Button: ', button);
 
-    ticker("ticker2", 1);
-
-    function ticker(id, step) {
-        var ticker = document.getElementById(id);
-        var headlines = ticker.querySelector(".headlines");
-        var links = headlines.getElementsByTagName("A");
-        var curX = headlines.offsetLeft;
-        var headlinesWidth = headlines.offsetWidth;
-        var tickerWidth = ticker.offsetWidth;
-        var linkWidth =
-            step < 0
-                ? links[0].offsetWidth
-                : links[links.length - 1].offsetWidth;
-        var animId;
-
-        // get the class headlines and add event  on mouse enter
-        headlines.addEventListener("mouseenter", function(e) {
-            // cancel animation
-            cancelAnimationFrame(animId);
+button.on("click", function() {
+    //console.log('Click');
+    window.open("file:///C:/Users/anton/Desktop/WLS/main.html");
+});
+////////////// Button Hover ////////////////////
+button
+    .on("mouseenter", function() {
+        $(this).css({
+            color: "whitesmoke",
+            border: "solid whitesmoke 3px"
         });
-        // get the class headlines and add event  on mouse leave
-        headlines.addEventListener("mouseleave", function() {
-            moveHeadlines();
-        });
-
-        moveHeadlines();
-
-        function moveHeadlines() {
-            curX += step;
-            if (step < 0 && curX < -linkWidth) {
-                curX += linkWidth;
-                headlines.appendChild(links[0]);
-                linkWidth = links[0].offsetWidth;
-            }
-            if (step > 0 && curX + headlinesWidth > tickerWidth + linkWidth) {
-                curX -= linkWidth;
-                headlines.insertBefore(links[links.length - 1], links[0]);
-                linkWidth = links[links.length - 1].offsetWidth;
-            }
-            headlines.style.left = curX + "px";
-            animId = requestAnimationFrame(moveHeadlines);
-        }
-    }
-})();
+    })
+    .on("mouseleave", function() {
+        var styles = {
+            color: "greenyellow",
+            border: "solid greenyellow 3px"
+        };
+        $(this).css(styles);
+    });
+//////////////////////////////////////////////////////
